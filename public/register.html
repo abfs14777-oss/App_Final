@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <header>
+        <h1>Secure App</h1>
+        <nav>
+            <a href="index.html">Login</a> |
+            <a href="register.html">Register</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Register</h2>
+        <form action="http://localhost:5000/api/auth/register" method="POST">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required minlength="3"><br><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required minlength="6"><br><br>
+            <label for="role">Role:</label><br>
+            <select id="role" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+            </select><br><br>
+            <button type="submit">Register</button>
+        </form>
+        <p><a href="index.html">Already have an account? Login</a></p>
+    </main>
+
+    <footer>
+        <p>Secure Web Application 2026</p>
+    </footer>
+</body>
+</html>

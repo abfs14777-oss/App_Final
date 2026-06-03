@@ -24,13 +24,17 @@ app.use(limiter);
 
 //middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+//Frontend
+app.use(express.static("public"));
 
 //routes
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 //start
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`server is running at port ${PORT}`)
 });
