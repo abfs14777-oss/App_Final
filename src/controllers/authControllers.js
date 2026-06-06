@@ -42,6 +42,13 @@ const register = async (req, res) => {
             return res.status(400).json({ message: "Password must be at least 6 characters" });
         }
 
+        // Check if username already exists
+        const existingUsers = await User.find();
+        const userExists = existingUsers.some(u => decrypt(u.username) === username);
+        if (userExists) {
+            return res.status(400).json({ message: "Username already exists" });
+        }
+
         // Encrypt username & hash password
         const encryptedUsername = encrypt(username);
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -70,12 +77,12 @@ const login = async (req, res) => {
         const user = users.find(u => decrypt(u.username) === username);
 
         if (!user) {
-            return res.status(404).json({ message: `user with this username ${username} not found` });
+            return res.status(401).json({ message: "Invalid credentials" });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(400).json({ message: "Wrong password" });
+            return res.status(401).json({ message: "Invalid credentials" });
         }
 
         const token = jwt.sign(
