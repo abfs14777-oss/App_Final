@@ -31,7 +31,7 @@ const register = async (req, res) => {
     try {
         const { username, password, role } = req.body;
 
-        // Prevent NoSQL Injection
+       
         if (typeof username !== 'string' || typeof password !== 'string') {
             return res.status(400).json({ message: "Invalid input" });
         }
