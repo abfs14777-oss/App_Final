@@ -31,6 +31,11 @@ const register = async (req, res) => {
     try {
         const { username, password, role } = req.body;
 
+        // Prevent NoSQL Injection
+        if (typeof username !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: "Invalid input" });
+        }
+
         // Input Validation
         if (!username || !password) {
             return res.status(400).json({ message: "All fields are required" });
@@ -66,6 +71,10 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     try {
         const { username, password } = req.body;
+
+        if (typeof username !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: "Invalid input" });
+        }
 
         // Input Validation
         if (!username || !password) {
